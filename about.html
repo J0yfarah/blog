@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About · Farah Tlemcani</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-tertiary: #9a9a9a;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --bg-subtle: #f7f7f5;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .site-nav {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.75rem 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .site-name {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    .page-header {
+      border-bottom: 2px solid var(--text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .page-title em {
+      font-style: italic;
+    }
+
+    .page-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .page-meta strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .bio p {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    .bio p strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .bio-quote {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-primary);
+      border-left: 2px solid var(--text-primary);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .exp-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .exp-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-org {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .exp-date {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 2px;
+    }
+
+    .exp-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-top: 0.4rem;
+    }
+
+    .award-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .award-row::before {
+      content: '→';
+      font-size: 11px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+    }
+
+    .about-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-block {
+      padding: 1.25rem;
+      background: var(--bg-subtle);
+      border-radius: 6px;
+    }
+
+    .sidebar-block-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .skill-list li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .skill-list li:last-child {
+      border-bottom: none;
+    }
+
+    .skill-bar {
+      width: 60px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--text-primary);
+      border-radius: 2px;
+    }
+
+    .lang-row {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .lang-row:last-child {
+      border-bottom: none;
+    }
+
+    .lang-level {
+      color: var(--text-tertiary);
+    }
+
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .contact-list a {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-list a:hover {
+      color: var(--text-primary);
+    }
+
+    .site-footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 2rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .site-footer a {
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 640px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-header {
+        grid-template-columns: 1fr;
+      }
+
+      .page-meta {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="site-name">Farah<em> · Tlemcani</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Writing</a></li>
+      <!-- <li><a href="archive.html">Archive</a></li> -->
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">About</p>
+        <h1 class="page-title">Tlemcani<br><em>Halima Farah</em></h1>
+      </div>
+      <div class="page-meta">
+        <strong>Based in</strong><br>Amsterdam, NL<br><br>
+        <strong>Open to</strong><br>Collaborations
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="bio">
+
+        <p>
+          Data Engineer and Technical Consultant with a <strong>Master's in Parallel &amp; Embedded
+            Industrial Computing</strong>. I build cloud-based data pipelines, optimize database performance,
+          and bridge the gap between messy real-world data and the systems that need to make sense of it.
+        </p>
+
+        <div class="bio-quote">
+          I build pipelines for data that doesn't want to be found.
+        </div>
+
+        <p>
+          Most recently at <strong>Qareeb</strong>, I designed and optimized a restaurant analytics platform
+          serving 85+ locations — cutting dashboard response times from several minutes to under one second
+          through TimescaleDB aggregation and BigQuery architecture. At <strong>Octadot LLC</strong>, I led
+          the data and AI stack for Hurudza, an agricultural platform that won the Huawei Developer
+          Competition both nationally (2024) and at the Northern Africa regional finals (2025).
+        </p>
+
+        <p>
+          Alongside engineering, I work as a <strong>Technical Business Analyst</strong> — translating
+          complex technical requirements into stakeholder-ready roadmaps, managing API integration projects,
+          and producing documentation that actually gets read. I'm comfortable presenting to government
+          panels, engineering teams, and everyone in between.
+        </p>
+
+        <p>
+          This blog is where I write about what I'm building and thinking about: data infrastructure in
+          underrepresented markets, NLP for Arabic and Darija, geospatial systems, and the unglamorous
+          engineering work that makes pipelines actually run.
+        </p>
+
+        <!-- EXPERIENCE -->
+        <div class="section-label">Experience</div>
+
+        <div class="exp-row">
+          <div>
+            <div class="exp-title">Data Scientist &amp; Technical Consultant</div>
+            <div class="exp-org">Qareeb</div>
+            <p class="exp-desc">
+              Built data pipelines processing transactional data from 85+ restaurant locations.
+              Achieved 99%+ improvement in query response times through PostgreSQL and TimescaleDB optimization.
+              Led API integration and incident resolution for third-party POS systems.
+            </p>
+          </div>
+          <div class="exp-date">Feb 2025<br>Aug 2025</div>
+        </div>
+
+        <div class="exp-row">
+          <div>
+            <div class="exp-title">Lead Solution Architect &amp; Data Scientist</div>
+            <div class="exp-org">Octadot LLC — Hurudza Platform</div>
+            <p class="exp-desc">
+              Architected end-to-end AI solution for precision agriculture on Huawei Cloud. Trained crop
+              recommendation (Random Forest, 95% accuracy) and plant disease detection (ResNet CNN, 83%)
+              models. Built IoT-to-dashboard data pipelines and Flask REST APIs.
+            </p>
+          </div>
+          <div class="exp-date">Jan 2023<br>Aug 2025</div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="section-label">Education</div>
+
+        <div class="exp-row">
+          <div>
+            <div class="exp-title">Master's — Parallel &amp; Embedded Industrial Computing</div>
+            <div class="exp-org">Distributed Systems · HPC · Data Warehousing &amp; Mining</div>
+          </div>
+          <div class="exp-date">June 2024</div>
+        </div>
+
+        <div class="exp-row">
+          <div>
+            <div class="exp-title">Bachelor's — Computer Science</div>
+            <div class="exp-org">Database Systems · Networking · Algorithms · Statistics</div>
+          </div>
+          <div class="exp-date">June 2022</div>
+        </div>
+
+        <!-- AWARDS -->
+        <div class="section-label">Awards</div>
+
+        <div class="award-row">Winner — Huawei Developer Competition 2025, Northern Africa Regional Finals</div>
+        <div class="award-row">National Winner — Huawei Developer Competition 2024</div>
+        <div class="award-row">First Prize — Techstars Startup Weekend 2023</div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="about-sidebar">
+
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Stack</div>
+          <ul class="skill-list">
+            <li>Python (Pandas, NumPy, Scrapy) <div class="skill-bar">
+                <div class="skill-bar-fill" style="width:95%"></div>
+              </div>
+            </li>
+            <li>SQL · PostgreSQL · TimescaleDB <div class="skill-bar">
+                <div class="skill-bar-fill" style="width:92%"></div>
+              </div>
+            </li>
+            <li>GCP · BigQuery <div class="skill-bar">
+                <div class="skill-bar-fill" style="width:88%"></div>
+              </div>
+            </li>
+            <li>REST APIs · Postman <div class="skill-bar">
+                <div class="skill-bar-fill" style="width:85%"></div>
+              </div>
+            </li>
+            <li>Docker · CI/CD basics <div class="skill-bar">
+                <div class="skill-bar-fill" style="width:70%"></div>
+              </div>
+            </li>
+            <li>ML · Scikit-learn · TensorFlow <div class="skill-bar">
+                <div class="skill-bar-fill" style="width:72%"></div>
+              </div>
+            </li>
+            <li>Grafana · Matplotlib · Plotly <div class="skill-bar">
+                <div class="skill-bar-fill" style="width:75%"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Languages</div>
+          <div class="lang-row"><span>Arabic</span><span class="lang-level">Native</span></div>
+          <div class="lang-row"><span>English</span><span class="lang-level">C2 · Full Professional</span></div>
+          <div class="lang-row"><span>French</span><span class="lang-level">C1 · Professional</span></div>
+        </div>
+
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Currently</div>
+          <ul class="skill-list">
+            <li style="display:block; border-bottom: 0.5px solid var(--border); padding-bottom: 0.6rem;">
+              <div style="font-weight:500; color:var(--text-primary); margin-bottom:0.2rem;">DZ-PROP-TRUTH</div>
+              <div>Phase 2 — price modelling per wilaya</div>
+            </li>
+            <li style="display:block; padding-top: 0.6rem;">
+              <div style="font-weight:500; color:var(--text-primary); margin-bottom:0.2rem;">Certifications</div>
+              <div>Google Advanced Data Analytics (ongoing)</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-block">
+          <div class="sidebar-block-label">Contact</div>
+          <ul class="contact-list">
+            <li><a href="mailto:farah.tlemcani00@gmail.com">✉ farah.tlemcani00@gmail.com</a></li>
+            <li><a href="https://linkedin.com/" target="_blank">↗ LinkedIn</a></li>
+            <li><a href="https://github.com/" target="_blank">↗ GitHub</a></li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span>Farah Tlemcani · Algiers → Amsterdam</span>
+    <span><a href="mailto:farah.tlemcani00@gmail.com">Email</a></span>
+  </footer>
+
+</body>
+
+</html>

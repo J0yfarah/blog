@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farah · Writing</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-tertiary: #9a9a9a;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --bg-subtle: #f7f7f5;
+      --accent: #1a1a1a;
+
+      --badge-eng: #F5C4B3;
+      --badge-eng-text: #712B13;
+      --badge-data: #E6F1FB;
+      --badge-data-text: #0C447C;
+      --badge-essay: #EAF3DE;
+      --badge-essay-text: #27500A;
+      --badge-note: #F3E8FF;
+      --badge-note-text: #581C87;
+      --badge-project: #FAEEDA;
+      --badge-project-text: #633806;
+      --badge-personal: #FFE4E6;
+      --badge-personal-text: #9F1239;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* ── SITE NAV ── */
+    .site-nav {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.75rem 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .site-name {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text-primary);
+    }
+
+    /* ── PAGE BODY ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      border-bottom: 2px solid var(--text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .page-title em {
+      font-style: italic;
+    }
+
+    .page-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .page-meta strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 3px;
+      border: 0.5px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+    }
+
+    .filter-btn.active {
+      background: var(--text-primary);
+      color: white;
+      border-color: var(--text-primary);
+    }
+
+    /* ── POST LIST ── */
+    .post-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post-row {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+
+    .post-row:hover .post-title {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .post-date {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      padding-top: 3px;
+      white-space: nowrap;
+    }
+
+    .post-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .post-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .post-excerpt {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .post-tags {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+
+    .badge-eng {
+      background: var(--badge-eng);
+      color: var(--badge-eng-text);
+    }
+
+    .badge-data {
+      background: var(--badge-data);
+      color: var(--badge-data-text);
+    }
+
+    .badge-essay {
+      background: var(--badge-essay);
+      color: var(--badge-essay-text);
+    }
+
+    .badge-note {
+      background: var(--badge-note);
+      color: var(--badge-note-text);
+    }
+
+    .badge-project {
+      background: var(--badge-project);
+      color: var(--badge-project-text);
+    }
+
+    .badge-personal {
+      background: var(--badge-personal);
+      color: var(--badge-personal-text);
+    }
+
+    .post-arrow {
+      font-size: 16px;
+      color: var(--text-tertiary);
+      align-self: center;
+      transition: transform 0.15s, color 0.15s;
+    }
+
+    .post-row:hover .post-arrow {
+      transform: translateX(3px);
+      color: var(--text-primary);
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem 2rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.5rem;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .site-footer a {
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 600px) {
+      .post-row {
+        grid-template-columns: 1fr auto;
+      }
+
+      .post-date {
+        display: none;
+      }
+
+      .page-header {
+        grid-template-columns: 1fr;
+      }
+
+      .page-meta {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="site-name">Farah<em> · Tlemcani</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Writing</a></li>
+      <!-- <li><a href="archive.html">Archive</a></li> -->
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">All posts · <strong>26 entries</strong></p>
+        <h1 class="page-title">Writing &amp;<br><em>Field Notes</em></h1>
+      </div>
+      <div class="page-meta">
+        <strong>Updated</strong><br>Apr 2025<br><br>
+        <strong>Topics</strong><br>Data · NLP · Algeria
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
+      <button class="filter-btn" onclick="filterPosts(this, 'eng')">Engineering</button>
+      <button class="filter-btn" onclick="filterPosts(this, 'data')">Data</button>
+      <button class="filter-btn" onclick="filterPosts(this, 'essay')">Essay</button>
+      <button class="filter-btn" onclick="filterPosts(this, 'note')">Note</button>
+      <button class="filter-btn" onclick="filterPosts(this, 'project')">Project</button>
+      <button class="filter-btn" onclick="filterPosts(this, 'personal')">Personal</button>
+    </div>
+
+    <div class="post-list" id="post-list">
+      <a class="post-row" href="blogs/2026-04-19_from-specs-to-scripts.html" data-tags="personal">
+        <span class="post-date">Apr 19, 2026</span>
+        <div class="post-body">
+          <span class="post-title">From Specs to Scripts: Why I Built This Space</span>
+          <p class="post-excerpt">A reflection on what it means to try to bring statistical rigor to markets that were
+            deliberately built to resist it.</p>
+          <div class="post-tags">
+            <span class="badge badge-personal">Personal</span>
+          </div>
+        </div>
+        <span class="post-arrow">→</span>
+      </a>
+
+      <!-- <a class="post-row" href="blogs/2025-04-14_algerian-property-truth-engine.html" data-tags="data project">
+        <span class="post-date">Apr 14, 2025</span>
+        <div class="post-body">
+          <span class="post-title">Building a Truth Engine for the Algerian Property Market</span>
+          <p class="post-excerpt">How we standardized informal listing data using NLP normalization and geospatial
+            clustering across 48 wilayas.</p>
+          <div class="post-tags">
+            <span class="badge badge-data">Data</span>
+            <span class="badge badge-project">Project</span>
+          </div>
+        </div>
+        <span class="post-arrow">→</span>
+      </a>
+
+
+
+      <a class="post-row" href="blogs/2025-03-10_informal-economy-data-problem.html" data-tags="essay">
+        <span class="post-date">Mar 10, 2025</span>
+        <div class="post-body">
+          <span class="post-title">The Informal Economy as Data Problem</span>
+          <p class="post-excerpt">A reflection on what it means to try to bring statistical rigor to markets that were
+            deliberately built to resist it.</p>
+          <div class="post-tags">
+            <span class="badge badge-essay">Essay</span>
+          </div>
+        </div>
+        <span class="post-arrow">→</span>
+      </a>
+
+      <a class="post-row" href="blogs/2025-02-19_dbt-lineage-graphs-not-documentation.html" data-tags="data">
+        <span class="post-date">Feb 19, 2025</span>
+        <div class="post-body">
+          <span class="post-title">dbt Lineage Graphs Are Not Documentation</span>
+          <p class="post-excerpt">Why auto-generated lineage is a starting point, not an end state — and how to actually
+            document a data model.</p>
+          <div class="post-tags">
+            <span class="badge badge-data">Data</span>
+          </div>
+        </div>
+        <span class="post-arrow">→</span>
+      </a>
+
+      <a class="post-row" href="blogs/2025-01-30_arabic-tokenization-tools-fall-short.html" data-tags="note">
+        <span class="post-date">Jan 30, 2025</span>
+        <div class="post-body">
+          <span class="post-title">On Arabic Tokenization and Why Standard Tools Fall Short</span>
+          <p class="post-excerpt">A quick note on dealing with Darija, shadda, and right-to-left rendering edge cases in
+            production NLP pipelines.</p>
+          <div class="post-tags">
+            <span class="badge badge-note">Note</span>
+          </div>
+        </div>
+        <span class="post-arrow">→</span>
+      </a>
+
+      <a class="post-row" href="blogs/2025-01-08_automating-geospatial-enrichment-github-actions.html"
+        data-tags="eng project">
+        <span class="post-date">Jan 08, 2025</span>
+        <div class="post-body">
+          <span class="post-title">Automating Geospatial Enrichment with GitHub Actions</span>
+          <p class="post-excerpt">A step-by-step walkthrough of our nightly pipeline that geocodes, clusters, and
+            enriches 40,000+ property listings.</p>
+          <div class="post-tags">
+            <span class="badge badge-eng">Engineering</span>
+            <span class="badge badge-project">Project</span>
+          </div>
+        </div>
+        <span class="post-arrow">→</span>
+      </a> -->
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>Farah · Tlemcani — Amsterdam</span>
+    <span><a href="https://github.com/" target="_blank">GitHub</a> · <a href="mailto:hello@example.com">Email</a></span>
+  </footer>
+
+  <script>
+    function filterPosts(btn, tag) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.post-row').forEach(row => {
+        const tags = (row.dataset.tags || '').split(' ');
+        row.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+
+</html>
