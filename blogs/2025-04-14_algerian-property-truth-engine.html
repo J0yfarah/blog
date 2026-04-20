@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building a Truth Engine for the Algerian Property Market · DZ-PROP-TRUTH</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #4a4a4a;
+      --color-text-tertiary: #9a9a9a;
+      --color-border-tertiary: #e0e0e0;
+      --color-background-secondary: #f9f9f9;
+      --badge-p: #E6F1FB;   --badge-p-text: #0C447C;
+      --badge-a: #EAF3DE;   --badge-a-text: #27500A;
+      --badge-purple: #F3E8FF; --badge-purple-text: #581C87;
+      --badge-e-bg: #F5C4B3; --badge-e-text: #712B13;
+    }
+
+    .doc {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--color-text-primary);
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      background: white;
+    }
+
+    /* ── header (same pattern as portal) ── */
+    .doc-header {
+      border-bottom: 2px solid var(--color-text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+    .doc-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .doc-eyebrow a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+    .doc-eyebrow a:hover { color: var(--color-text-primary); text-decoration: underline; }
+    .doc-title {
+      font-family: 'Fraunces', serif;
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    .doc-title em { font-style: italic; }
+    .doc-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      line-height: 1.9;
+    }
+    .doc-meta strong { color: var(--color-text-primary); font-weight: 500; }
+
+    /* ── badges ── */
+    .badge {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 500;
+      display: inline-block;
+    }
+    .badge-data    { background: var(--badge-p);      color: var(--badge-p-text); }
+    .badge-project { background: var(--badge-a);      color: var(--badge-a-text); }
+    .badge-eng     { background: var(--badge-e-bg);   color: var(--badge-e-text); }
+    .badge-essay   { background: var(--badge-purple); color: var(--badge-purple-text); }
+
+    /* ── layout: article + sidebar ── */
+    .post-layout {
+      display: grid;
+      grid-template-columns: 1fr 210px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    /* ── article body ── */
+    .article p {
+      font-size: 13.5px;
+      line-height: 1.9;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.4rem;
+    }
+    .article h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin: 2.5rem 0 0.9rem;
+      color: var(--color-text-primary);
+    }
+    .article h2 em { font-style: italic; }
+    .article h3 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0 0.6rem;
+      color: var(--color-text-primary);
+    }
+    .article blockquote {
+      border-left: 2px solid var(--color-text-primary);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+    .article pre {
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 6px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.4rem 0;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .article code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--color-background-secondary);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    .article pre code { background: none; padding: 0; }
+    .article ul, .article ol { padding-left: 1.25rem; margin-bottom: 1.4rem; }
+    .article li { font-size: 13.5px; line-height: 1.85; color: var(--color-text-secondary); margin-bottom: 0.35rem; }
+    .article a { color: var(--color-text-primary); text-underline-offset: 3px; }
+
+    .callout {
+      background: var(--color-background-secondary);
+      border-left: 2px solid var(--color-text-primary);
+      padding: 1rem 1.25rem;
+      margin: 1.75rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-bottom: 0.4rem; }
+    .callout p { font-size: 12.5px; margin-bottom: 0; }
+
+    /* ── sidebar ── */
+    .sidebar { position: sticky; top: 2rem; display: flex; flex-direction: column; gap: 2rem; }
+
+    .sidebar-block {
+      padding: 1.1rem 1.25rem;
+      background: var(--color-background-secondary);
+      border-radius: 8px;
+    }
+    .sidebar-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+
+    /* toc */
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .toc-list a {
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+      display: block;
+    }
+    .toc-list a:hover { color: var(--color-text-primary); text-decoration: underline; text-underline-offset: 2px; }
+
+    /* project doc links */
+    .doc-links { display: flex; flex-direction: column; gap: 0.6rem; }
+    .doc-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      padding: 0.5rem 0.6rem;
+      border-radius: 5px;
+      border: 0.5px solid var(--color-border-tertiary);
+      transition: all 0.15s;
+      gap: 0.5rem;
+    }
+    .doc-link:hover { border-color: var(--color-text-primary); color: var(--color-text-primary); background: white; }
+    .doc-link-label {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 1px 5px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .doc-link-label.l-a      { background: var(--badge-a);      color: var(--badge-a-text); }
+    .doc-link-label.l-e      { background: var(--badge-e-bg);   color: var(--badge-e-text); }
+    .doc-link-label.l-p      { background: var(--badge-p);      color: var(--badge-p-text); }
+    .doc-link-label.l-purple { background: var(--badge-purple); color: var(--badge-purple-text); }
+    .doc-link-arrow { color: var(--color-text-tertiary); flex-shrink: 0; }
+
+    /* ── back link ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--color-text-tertiary);
+      margin-bottom: 2rem;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--color-text-primary); }
+
+    /* ── footer ── */
+    .footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 680px) {
+      .post-layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .doc-header { grid-template-columns: 1fr; }
+      .doc-meta { text-align: left; margin-top: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="doc">
+
+  <a href="../index.html" class="back-link">← Back to portal</a>
+
+  <!-- ══ HEADER ══ -->
+  <div class="doc-header">
+    <div>
+      <p class="doc-eyebrow">
+        <a href="../index.html">DZ-PROP-TRUTH</a> · Field Notes ·
+        <span class="badge badge-data" style="vertical-align:middle;">Data</span>
+        <span class="badge badge-project" style="vertical-align:middle;">Project</span>
+      </p>
+      <h1 class="doc-title">Building a Truth Engine for the<br><em>Algerian Property Market</em></h1>
+    </div>
+    <div class="doc-meta">
+      <strong>Date</strong><br>Apr 14, 2025<br><br>
+      <strong>Read</strong><br>8 min<br><br>
+      <strong>Author</strong><br>Farah (9otna)
+    </div>
+  </div>
+
+  <!-- ══ BODY ══ -->
+  <div class="post-layout">
+
+    <article class="article">
+
+      <p>
+        Algeria's property market is one of the most opaque in North Africa. Listings are scattered
+        across a dozen platforms, written in a mix of Darija, French, and MSA, with prices quoted in
+        a currency that officially doesn't exist at the rate everyone uses. This is the problem
+        DZ-PROP-TRUTH was built to solve.
+      </p>
+
+      <blockquote>
+        The data exists. It just refuses to cooperate.
+      </blockquote>
+
+      <h2 id="challenge">The <em>core challenge</em></h2>
+
+      <p>
+        When we first started scraping listings, the raw data was genuinely difficult to work with —
+        not because it was sparse, but because each platform had invented its own ontology.
+        One called a studio a <code>F1</code>, another a <code>T1</code>, another <code>1p</code>,
+        and several just wrote "studio" in Arabic. Prices appeared in DZD, EUR, and an informal
+        USD-parallel rate simultaneously.
+      </p>
+
+      <p>
+        There was no shared coordinate system, no standard wilaya code, and no canonical
+        neighborhood vocabulary. Every field required its own normalization logic before
+        it could be used in any downstream analysis.
+      </p>
+
+      <h3>Normalization pipeline</h3>
+
+      <p>
+        Our NLP normalization pipeline handles this in three stages. First, a language detector
+        tags each field with its dominant script. Then a token-level normalizer maps known synonyms
+        to a canonical schema. Finally, a confidence scorer surfaces records that need human review.
+      </p>
+
+      <pre><code>def normalize_type(raw: str) -> tuple[str, float]:
+    """Map informal listing type strings to canonical schema."""
+    tokens = tokenize_darija_fr(raw.strip().lower())
+    for token in tokens:
+        if match := TYPE_SYNONYMS.get(token):
+            return match, 1.0
+    return fuzzy_match(tokens, TYPE_SYNONYMS)</code></pre>
+
+      <div class="callout">
+        <div class="callout-label">⚠ Edge case</div>
+        <p>
+          Listings in pied-de-page often contain the property type buried in a sentence.
+          The token-level approach fails here — we fall back to a small fine-tuned classifier
+          trained on 2,400 manually labelled examples.
+        </p>
+      </div>
+
+      <h2 id="geo">Geospatial <em>enrichment</em></h2>
+
+      <p>
+        The second major challenge was location. Most listings include a neighborhood name,
+        but Algerian neighborhoods have no official geocoding standard. Our solution was to build
+        a custom gazetteer from OpenStreetMap relations, supplemented with crowd-validated
+        corrections, covering all 48 wilayas.
+      </p>
+
+      <p>
+        We run the full enrichment pipeline nightly via GitHub Actions, processing around
+        40,000 listings in under 12 minutes on standard compute. The output lands in BigQuery,
+        partitioned by wilaya and clustered by property type, so regional queries stay cheap.
+      </p>
+
+      <h2 id="results">Results <em>so far</em></h2>
+
+      <p>
+        After standardization, we achieved a <strong>99%+ improvement in data retrieval
+        efficiency</strong> through optimized API rate limiting, error handling, and
+        TimescaleDB aggregation. Dashboard query times dropped from several minutes to
+        under one second. The normalized dataset now covers approximately 400,000 listings
+        with confidence scores attached to every field.
+      </p>
+
+      <ul>
+        <li>48 wilayas fully geocoded and indexed</li>
+        <li>12 property-type synonyms collapsed to a single canonical schema</li>
+        <li>3 currency variants normalized to a single reference price</li>
+        <li>Nightly pipeline runs in &lt;12 min via GitHub Actions</li>
+      </ul>
+
+      <h2 id="next">What's <em>next</em></h2>
+
+      <p>
+        Phase two focuses on price modelling. We're building hedonic regression models
+        per wilaya, using the normalized dataset as training data. Early results suggest
+        we can estimate fair market value within ±8% for well-represented neighborhoods.
+        The long tail — rural areas, rare typologies — is harder.
+      </p>
+
+      <ul>
+        <li>Deploy per-wilaya price indices with confidence intervals</li>
+        <li>Build a public Streamlit dashboard for journalists and researchers</li>
+        <li>Open-source the normalization lexicon under CC-BY</li>
+      </ul>
+
+      <p>
+        The full technical roadmap and strategic context are documented in the project
+        documents linked in the sidebar.
+      </p>
+
+    </article>
+
+    <!-- ══ SIDEBAR ══ -->
+    <aside class="sidebar">
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Contents</div>
+        <ul class="toc-list">
+          <li><a href="#challenge">The core challenge</a></li>
+          <li><a href="#geo">Geospatial enrichment</a></li>
+          <li><a href="#results">Results so far</a></li>
+          <li><a href="#next">What's next</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-label">Project Documents</div>
+        <div class="doc-links">
+          <a href="../DZ_PROP_TRUTH_Executive_Summary.html" class="doc-link">
+            <span class="doc-link-label l-a">Synthesis</span>
+            Executive Summary
+            <span class="doc-link-arrow">→</span>
+          </a>
+          <a href="../DZ_PROP_TRUTH_strategy.html" class="doc-link">
+            <span class="doc-link-label l-e">Eng</span>
+            PACE Strategy
+            <span class="doc-link-arrow">→</span>
+          </a>
+          <a href="../DZ_PROP_TRUTH_Proposal.html" class="doc-link">
+            <span class="doc-link-label l-p">Foundation</span>
+            Project Proposal
+            <span class="doc-link-arrow">→</span>
+          </a>
+          <a href="../DZ_PROP_TRUTH_Impact_Assessment.html" class="doc-link">
+            <span class="doc-link-label l-purple">Impact</span>
+            Impact Assessment
+            <span class="doc-link-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <div class="footer">
+    DZ-PROP-TRUTH · Built with BigQuery · GitHub Actions · Python · Streamlit
+  </div>
+
+</div>
+</body>
+</html>

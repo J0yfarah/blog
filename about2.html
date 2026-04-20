@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About · Farah</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-tertiary: #9a9a9a;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --bg-subtle: #f7f7f5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .site-nav {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.75rem 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .site-name {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-secondary);
+    }
+    .nav-links a.active,
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    .page-header {
+      border-bottom: 2px solid var(--text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .page-title em { font-style: italic; }
+
+    .page-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .page-meta strong { color: var(--text-primary); font-weight: 500; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .bio p {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    .bio p strong { color: var(--text-primary); font-weight: 500; }
+
+    .bio-quote {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--text-primary);
+      border-left: 2px solid var(--text-primary);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    /* ── SIDEBAR ── */
+    .about-sidebar { display: flex; flex-direction: column; gap: 2rem; }
+
+    .sidebar-block {
+      padding: 1.25rem;
+      background: var(--bg-subtle);
+      border-radius: 6px;
+    }
+
+    .sidebar-block-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .skill-list li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .skill-list li:last-child { border-bottom: none; }
+
+    .skill-bar {
+      width: 60px;
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: var(--text-primary);
+      border-radius: 2px;
+    }
+
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .contact-list a {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-list a:hover { color: var(--text-primary); }
+
+    .contact-icon {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      min-width: 14px;
+    }
+
+    .current-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .current-list li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--border);
+    }
+
+    .current-list li strong { color: var(--text-primary); font-weight: 500; }
+
+    .site-footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 2rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .site-footer a { color: var(--text-tertiary); text-decoration: none; }
+    .site-footer a:hover { color: var(--text-primary); }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .page-header { grid-template-columns: 1fr; }
+      .page-meta { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="site-name">Farah<em> · 9otna</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Writing</a></li>
+    <li><a href="archive.html">Archive</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <div class="page-header">
+    <div>
+      <p class="page-eyebrow">About this site</p>
+      <h1 class="page-title">Farah<br><em>(9otna)</em></h1>
+    </div>
+    <div class="page-meta">
+      <strong>Based in</strong><br>Algiers, Algeria<br><br>
+      <strong>Open to</strong><br>Collaborations
+    </div>
+  </div>
+
+  <div class="about-grid">
+
+    <div class="bio">
+      <p>
+        I'm a data engineer and researcher working at the intersection of
+        <strong>informal economics, NLP, and geospatial systems</strong>. Most of my work focuses on
+        making sense of markets that were never designed to be legible to outsiders.
+      </p>
+
+      <div class="bio-quote">
+        I build pipelines for data that doesn't want to be found.
+      </div>
+
+      <p>
+        Currently leading <strong>DZ-PROP-TRUTH</strong>, a project to standardize and index the Algerian
+        real estate market using automated scraping, Arabic/French NLP normalization, and
+        BigQuery-backed geospatial analytics across all 48 wilayas.
+      </p>
+
+      <p>
+        Before that, I spent a few years in logistics data — optimizing last-mile delivery networks
+        across North Africa, which is where I first encountered the "informal economy as data problem"
+        that now shapes most of what I think about.
+      </p>
+
+      <p>
+        This blog is where I write about the technical problems I encounter, the tools I build to
+        solve them, and occasionally the broader questions about data infrastructure in economies
+        that are structurally underrepresented in the global tech conversation.
+      </p>
+
+      <p>
+        If you're working on something adjacent, I'm happy to talk. Reach me via the links on the right,
+        or just open an issue on any of my public repos.
+      </p>
+    </div>
+
+    <aside class="about-sidebar">
+
+      <div class="sidebar-block">
+        <div class="sidebar-block-label">Stack</div>
+        <ul class="skill-list">
+          <li>Python <div class="skill-bar"><div class="skill-bar-fill" style="width:95%"></div></div></li>
+          <li>BigQuery / SQL <div class="skill-bar"><div class="skill-bar-fill" style="width:90%"></div></div></li>
+          <li>dbt <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div></li>
+          <li>NLP / spaCy <div class="skill-bar"><div class="skill-bar-fill" style="width:75%"></div></div></li>
+          <li>Streamlit <div class="skill-bar"><div class="skill-bar-fill" style="width:70%"></div></div></li>
+          <li>GitHub Actions <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-block-label">Currently</div>
+        <ul class="current-list">
+          <li><strong>DZ-PROP-TRUTH</strong> — Phase 2: price modelling per wilaya</li>
+          <li><strong>Reading</strong> — The Data Detective, Tim Harford</li>
+          <li><strong>Exploring</strong> — Hedonic regression for informal markets</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sidebar-block-label">Contact</div>
+        <ul class="contact-list">
+          <li><a href="mailto:hello@example.com"><span class="contact-icon">✉</span> hello@example.com</a></li>
+          <li><a href="https://github.com/" target="_blank"><span class="contact-icon">↗</span> GitHub</a></li>
+          <li><a href="https://linkedin.com/" target="_blank"><span class="contact-icon">↗</span> LinkedIn</a></li>
+        </ul>
+      </div>
+
+    </aside>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <span>Farah · 9otna — Algiers</span>
+  <span><a href="https://github.com/" target="_blank">GitHub</a> · <a href="mailto:hello@example.com">Email</a></span>
+</footer>
+
+</body>
+</html>

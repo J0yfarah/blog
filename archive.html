@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive · Farah</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-tertiary: #9a9a9a;
+      --border: #e0e0e0;
+      --bg: #ffffff;
+      --bg-subtle: #f7f7f5;
+      --badge-eng: #F5C4B3;
+      --badge-eng-text: #712B13;
+      --badge-data: #E6F1FB;
+      --badge-data-text: #0C447C;
+      --badge-essay: #EAF3DE;
+      --badge-essay-text: #27500A;
+      --badge-note: #F3E8FF;
+      --badge-note-text: #581C87;
+      --badge-project: #FAEEDA;
+      --badge-project-text: #633806;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    .site-nav {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.75rem 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .site-name {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    .page-header {
+      border-bottom: 2px solid var(--text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .page-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+      font-family: 'Fraunces', serif;
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .page-title em {
+      font-style: italic;
+    }
+
+    .page-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .page-meta strong {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* ── TAG CLOUD ── */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .tag-chip {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      border: none;
+      font-family: 'IBM Plex Mono', monospace;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .tag-chip:hover {
+      transform: translateY(-1px);
+    }
+
+    .tag-chip.dim {
+      opacity: 0.4;
+    }
+
+    .tag-eng {
+      background: var(--badge-eng);
+      color: var(--badge-eng-text);
+    }
+
+    .tag-data {
+      background: var(--badge-data);
+      color: var(--badge-data-text);
+    }
+
+    .tag-essay {
+      background: var(--badge-essay);
+      color: var(--badge-essay-text);
+    }
+
+    .tag-note {
+      background: var(--badge-note);
+      color: var(--badge-note-text);
+    }
+
+    .tag-project {
+      background: var(--badge-project);
+      color: var(--badge-project-text);
+    }
+
+    .tag-all {
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      border: 0.5px solid var(--border);
+    }
+
+    /* ── YEAR GROUPS ── */
+    .year-group {
+      margin-bottom: 3rem;
+    }
+
+    .year-heading {
+      font-family: 'Fraunces', serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+      user-select: none;
+    }
+
+    .archive-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .archive-table tr {
+      border-bottom: 0.5px solid var(--border);
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    .archive-table tr:hover td {
+      color: var(--text-primary);
+    }
+
+    .archive-table tr:hover .arch-title {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .archive-table td {
+      padding: 0.85rem 0;
+      vertical-align: middle;
+      transition: color 0.15s;
+    }
+
+    .arch-date {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      width: 90px;
+    }
+
+    .arch-title {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      padding-right: 1rem;
+    }
+
+    .arch-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      width: 160px;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 500;
+    }
+
+    .badge-eng {
+      background: var(--badge-eng);
+      color: var(--badge-eng-text);
+    }
+
+    .badge-data {
+      background: var(--badge-data);
+      color: var(--badge-data-text);
+    }
+
+    .badge-essay {
+      background: var(--badge-essay);
+      color: var(--badge-essay-text);
+    }
+
+    .badge-note {
+      background: var(--badge-note);
+      color: var(--badge-note-text);
+    }
+
+    .badge-project {
+      background: var(--badge-project);
+      color: var(--badge-project-text);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .site-footer {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1.5rem 2rem 2rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+    }
+
+    .site-footer a {
+      color: var(--text-tertiary);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 600px) {
+      .arch-tags {
+        display: none;
+      }
+
+      .year-heading {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="site-name">Farah<em> · Tlemcani</em></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Writing</a></li>
+      <li><a href="archive.html" class="active">Archive</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Full archive · <strong id="post-count">26 posts</strong></p>
+        <h1 class="page-title">All Posts,<br><em>Indexed</em></h1>
+      </div>
+      <div class="page-meta">
+        <strong>Since</strong><br>Jan 2024<br><br>
+        <strong>Topics</strong><br>5 categories
+      </div>
+    </div>
+
+    <div class="tag-cloud">
+      <button class="tag-chip tag-all active" onclick="filterTag(this, 'all')">All posts</button>
+      <button class="tag-chip tag-eng" onclick="filterTag(this, 'eng')">Engineering</button>
+      <button class="tag-chip tag-data" onclick="filterTag(this, 'data')">Data</button>
+      <button class="tag-chip tag-essay" onclick="filterTag(this, 'essay')">Essay</button>
+      <button class="tag-chip tag-note" onclick="filterTag(this, 'note')">Note</button>
+      <button class="tag-chip tag-project" onclick="filterTag(this, 'project')">Project</button>
+    </div>
+
+    <!-- 2025 -->
+    <div class="year-group" id="group-2025">
+      <div class="year-heading">2025</div>
+      <table class="archive-table">
+        <tbody>
+          <tr data-tags="data project" onclick="location.href='post.html'">
+            <td class="arch-date">Apr 14</td>
+            <td class="arch-title">Building a Truth Engine for the Algerian Property Market</td>
+            <td class="arch-tags"><span class="badge badge-data">Data</span><span
+                class="badge badge-project">Project</span></td>
+          </tr>
+          <tr data-tags="eng" onclick="location.href='post.html'">
+            <td class="arch-date">Mar 28</td>
+            <td class="arch-title">BigQuery Cost Optimization: Lessons from 2 TB of Daily Ingestion</td>
+            <td class="arch-tags"><span class="badge badge-eng">Engineering</span></td>
+          </tr>
+          <tr data-tags="essay" onclick="location.href='post.html'">
+            <td class="arch-date">Mar 10</td>
+            <td class="arch-title">The Informal Economy as Data Problem</td>
+            <td class="arch-tags"><span class="badge badge-essay">Essay</span></td>
+          </tr>
+          <tr data-tags="data" onclick="location.href='post.html'">
+            <td class="arch-date">Feb 19</td>
+            <td class="arch-title">dbt Lineage Graphs Are Not Documentation</td>
+            <td class="arch-tags"><span class="badge badge-data">Data</span></td>
+          </tr>
+          <tr data-tags="note" onclick="location.href='post.html'">
+            <td class="arch-date">Jan 30</td>
+            <td class="arch-title">On Arabic Tokenization and Why Standard Tools Fall Short</td>
+            <td class="arch-tags"><span class="badge badge-note">Note</span></td>
+          </tr>
+          <tr data-tags="eng project" onclick="location.href='post.html'">
+            <td class="arch-date">Jan 08</td>
+            <td class="arch-title">Automating Geospatial Enrichment with GitHub Actions</td>
+            <td class="arch-tags"><span class="badge badge-eng">Engineering</span><span
+                class="badge badge-project">Project</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 2024 -->
+    <div class="year-group" id="group-2024">
+      <div class="year-heading">2024</div>
+      <table class="archive-table">
+        <tbody>
+          <tr data-tags="essay" onclick="location.href='post.html'">
+            <td class="arch-date">Dec 12</td>
+            <td class="arch-title">Why Algeria's Price Data Is a Political Statement</td>
+            <td class="arch-tags"><span class="badge badge-essay">Essay</span></td>
+          </tr>
+          <tr data-tags="data eng" onclick="location.href='post.html'">
+            <td class="arch-date">Nov 04</td>
+            <td class="arch-title">Building a Multilingual Synonym Lexicon at Scale</td>
+            <td class="arch-tags"><span class="badge badge-data">Data</span><span
+                class="badge badge-eng">Engineering</span></td>
+          </tr>
+          <tr data-tags="note" onclick="location.href='post.html'">
+            <td class="arch-date">Oct 17</td>
+            <td class="arch-title">Short Note: Using OSM Relations as a Geocoding Gazetteer</td>
+            <td class="arch-tags"><span class="badge badge-note">Note</span></td>
+          </tr>
+          <tr data-tags="project" onclick="location.href='post.html'">
+            <td class="arch-date">Sep 01</td>
+            <td class="arch-title">DZ-PROP-TRUTH: Project Kickoff and Initial Scope</td>
+            <td class="arch-tags"><span class="badge badge-project">Project</span></td>
+          </tr>
+          <tr data-tags="eng" onclick="location.href='post.html'">
+            <td class="arch-date">Jul 20</td>
+            <td class="arch-title">Scraping at Scale Without Getting Blocked</td>
+            <td class="arch-tags"><span class="badge badge-eng">Engineering</span></td>
+          </tr>
+          <tr data-tags="essay" onclick="location.href='post.html'">
+            <td class="arch-date">May 15</td>
+            <td class="arch-title">The Standardization Problem Is Always a Political Problem</td>
+            <td class="arch-tags"><span class="badge badge-essay">Essay</span></td>
+          </tr>
+          <tr data-tags="data" onclick="location.href='post.html'">
+            <td class="arch-date">Mar 03</td>
+            <td class="arch-title">Confidence Scoring for Noisy Real-World Data</td>
+            <td class="arch-tags"><span class="badge badge-data">Data</span></td>
+          </tr>
+          <tr data-tags="note" onclick="location.href='post.html'">
+            <td class="arch-date">Jan 22</td>
+            <td class="arch-title">Quick Note: Streamlit Session State Gotchas</td>
+            <td class="arch-tags"><span class="badge badge-note">Note</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>Farah · Tlemcani — Algiers</span>
+    <span><a href="https://github.com/" target="_blank">GitHub</a> · <a href="mailto:hello@example.com">Email</a></span>
+  </footer>
+
+  <script>
+    let activeTag = 'all';
+
+    function filterTag(btn, tag) {
+      activeTag = tag;
+      document.querySelectorAll('.tag-chip').forEach(b => b.classList.remove('active', 'dim'));
+      btn.classList.add('active');
+      document.querySelectorAll('.tag-chip').forEach(b => {
+        if (b !== btn) b.classList.add('dim');
+      });
+
+      let visibleCount = 0;
+
+      document.querySelectorAll('.archive-table tr').forEach(row => {
+        const tags = (row.dataset.tags || '').split(' ');
+        const show = tag === 'all' || tags.includes(tag);
+        row.classList.toggle('hidden', !show);
+        if (show) visibleCount++;
+      });
+
+      document.querySelectorAll('.year-group').forEach(group => {
+        const visibleRows = group.querySelectorAll('tr:not(.hidden)');
+        group.classList.toggle('hidden', visibleRows.length === 0);
+      });
+
+      document.getElementById('post-count').textContent = visibleCount + ' post' + (visibleCount !== 1 ? 's' : '');
+    }
+  </script>
+
+</body>
+
+</html>
