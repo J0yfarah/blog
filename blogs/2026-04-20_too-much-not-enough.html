@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Too Much, Not Enough · Farah Tlemcani</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #4a4a4a;
+      --color-text-tertiary: #9a9a9a;
+      --color-border-tertiary: #e0e0e0;
+      --color-background-secondary: #f9f9f9;
+      --badge-p: #E6F1FB;
+      --badge-p-text: #0C447C;
+      --badge-a: #EAF3DE;
+      --badge-a-text: #27500A;
+      --badge-purple: #F3E8FF;
+      --badge-purple-text: #581C87;
+      --badge-e-bg: #F5C4B3;
+      --badge-e-text: #712B13;
+      --badge-personal: #FFE4E6;
+      --badge-personal-text: #9F1239;
+    }
+
+    .doc {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--color-text-primary);
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      background: white;
+    }
+
+    .doc-header {
+      border-bottom: 2px solid var(--color-text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .doc-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-eyebrow a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+
+    .doc-eyebrow a:hover {
+      color: var(--color-text-primary);
+      text-decoration: underline;
+    }
+
+    .doc-title {
+      font-family: 'Fraunces', serif;
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .doc-title em {
+      font-style: italic;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      line-height: 1.9;
+    }
+
+    .doc-meta strong {
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    .badge {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .badge-data {
+      background: var(--badge-p);
+      color: var(--badge-p-text);
+    }
+
+    .badge-project {
+      background: var(--badge-a);
+      color: var(--badge-a-text);
+    }
+
+    .badge-eng {
+      background: var(--badge-e-bg);
+      color: var(--badge-e-text);
+    }
+
+    .badge-essay {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .badge-note {
+      background: #f1f1ee;
+      color: #4a4a4a;
+    }
+
+    .badge-personal {
+      background: var(--badge-personal);
+      color: var(--badge-personal-text);
+    }
+
+    .post-layout {
+      display: grid;
+      grid-template-columns: 1fr 210px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .article p {
+      font-size: 13.5px;
+      line-height: 1.9;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.4rem;
+    }
+
+    .article h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin: 2.5rem 0 0.9rem;
+      color: var(--color-text-primary);
+    }
+
+    .article h2 em {
+      font-style: italic;
+    }
+
+    .article h3 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0 0.6rem;
+      color: var(--color-text-primary);
+    }
+
+    .article blockquote {
+      border-left: 2px solid var(--color-text-primary);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    .article pre {
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 6px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.4rem 0;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .article code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--color-background-secondary);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .article pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .article ul,
+    .article ol {
+      padding-left: 1.25rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .article li {
+      font-size: 13.5px;
+      line-height: 1.85;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.35rem;
+    }
+
+    .article a {
+      color: var(--color-text-primary);
+      text-underline-offset: 3px;
+    }
+
+    .callout {
+      background: var(--color-background-secondary);
+      border-left: 2px solid var(--color-text-primary);
+      padding: 1rem 1.25rem;
+      margin: 1.75rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .callout p {
+      font-size: 12.5px;
+      margin-bottom: 0;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-block {
+      padding: 1.1rem 1.25rem;
+      background: var(--color-background-secondary);
+      border-radius: 8px;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .toc-list a {
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+      display: block;
+    }
+
+    .toc-list a:hover {
+      color: var(--color-text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .doc-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .doc-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      padding: 0.5rem 0.6rem;
+      border-radius: 5px;
+      border: 0.5px solid var(--color-border-tertiary);
+      transition: all 0.15s;
+      gap: 0.5rem;
+    }
+
+    .doc-link:hover {
+      border-color: var(--color-text-primary);
+      color: var(--color-text-primary);
+      background: white;
+    }
+
+    .doc-link-label {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 1px 5px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .doc-link-label.l-a {
+      background: var(--badge-a);
+      color: var(--badge-a-text);
+    }
+
+    .doc-link-label.l-e {
+      background: var(--badge-e-bg);
+      color: var(--badge-e-text);
+    }
+
+    .doc-link-label.l-p {
+      background: var(--badge-p);
+      color: var(--badge-p-text);
+    }
+
+    .doc-link-label.l-purple {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .doc-link-arrow {
+      color: var(--color-text-tertiary);
+      flex-shrink: 0;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--color-text-tertiary);
+      margin-bottom: 2rem;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover {
+      color: var(--color-text-primary);
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 680px) {
+      .post-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .doc-header {
+        grid-template-columns: 1fr;
+      }
+
+      .doc-meta {
+        text-align: left;
+        margin-top: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="doc">
+
+    <a href="../index.html" class="back-link">← Back to portal</a>
+
+    <div class="doc-header">
+      <div>
+        <p class="doc-eyebrow">
+          <a href="../index.html">My Personal Blog</a> · Field Notes ·
+          <span class="badge badge-essay" style="vertical-align:middle;">Essay</span>
+          <span class="badge badge-data" style="vertical-align:middle;">Career</span>
+        </p>
+        <h1 class="doc-title">
+          Too Much, Not Enough:<br>
+          <em>Field Notes from the Dutch Tech Job Market</em>
+        </h1>
+      </div>
+      <div class="doc-meta">
+        <strong>Date</strong><br>April 20, 2026<br><br>
+        <strong>Read</strong><br>6 min<br><br>
+        <strong>Author</strong><br>Farah Tlemcani
+      </div>
+    </div>
+
+    <div class="post-layout">
+      <article class="article">
+
+        <p>
+          I graduated in 2024 with a Master's in Parallel and Embedded Industrial Computing.
+          By most definitions, I was prepared. I had two startup experiences under my belt, had led teams,
+          managed stakeholders, built data pipelines, shipped AI models to production, and won a multinational
+          competition doing it. I opened LinkedIn with reasonable confidence.
+        </p>
+
+        <p>The market had other plans.</p>
+
+        <blockquote>
+          The rejection emails all read the same. "We regret to inform you that we have decided to
+          continue with other candidates." Signed, Workday.
+        </blockquote>
+
+        <h2 id="the-shape">The Shape of <em>the Problem</em></h2>
+
+        <p>
+          The Dutch tech job market has a shape. And right now, that shape is a T.
+        </p>
+
+        <p>
+          T-shaped professionals: deep expertise in one domain, broad awareness of others, are what
+          companies here are hiring for. What I brought was something closer to a pentagon: data engineering,
+          AI development, business analysis, product ownership, stakeholder management, technical documentation.
+          Startup life does that to you. When you are three people trying to do the work of fifteen, you stop
+          asking "is this my job" and start asking "does this need to get done."
+        </p>
+
+        <p>
+          That experience taught me more than any curriculum could. But it also made me genuinely difficult
+          to slot into a job description. Too experienced for junior roles, not specialized enough for
+          mid-level ones. A jack of all trades in a market that has very specific trades in mind.
+        </p>
+
+        <h2 id="blockers">The Blockers, <em>Ranked</em></h2>
+
+        <h3>1. The language wall</h3>
+
+        <p>
+          A significant portion of data and analytics roles in the Netherlands, especially in the public
+          sector, healthcare, and local enterprise, list Dutch fluency as a hard requirement. Not preferred.
+          Required. I would read a job description and fit every technical bullet point, and then hit that
+          last line like a wall.
+        </p>
+
+        <p>
+          I am not going to pretend this is not frustrating. It is. But I also understand it. Client-facing
+          roles need communication. Regulated industries need documentation in the local language. It is what
+          it is, and the answer to "it is what it is" is Duolingo, gemeente language courses, and a lot of
+          YouTube.
+        </p>
+
+        <h3>2. The entry-level paradox</h3>
+
+        <p>
+          Junior roles in this market are not actually junior. The listings say "0-2 years experience" and
+          then require cloud certifications, production pipeline experience, and familiarity with three
+          different orchestration tools. The entry level has quietly become the mid-level, and nobody
+          updated the salary range to match.
+        </p>
+
+        <p>
+          Meanwhile, the candidate pool is enormous. Amsterdam attracts international talent from everywhere.
+          For every role I apply to, I am competing with people who have been doing exactly that one thing
+          for three years, in exactly that stack, with Dutch as a bonus. The automated screening does not
+          care about range. It cares about keywords.
+        </p>
+
+        <h3>3. The CV ceiling</h3>
+
+        <p>
+          This is the one that got to me the most. I never had trouble selling myself in a room. Put me in
+          front of a hiring manager and I will make the case. But I could not get in the room. The CV goes
+          in, the automated rejection comes out, and somewhere in between there is an ATS system making
+          decisions I never got to contest.
+        </p>
+
+        <div class="callout">
+          <div class="callout-label">→ A closed door</div>
+          <p>Internships seemed like a logical workaround, a lower barrier to entry, a chance to prove value
+            in a real setting. Then I learned that Dutch law restricts internships to enrolled students only.
+            That door was legally closed before I even knocked.</p>
+        </div>
+
+        <h2 id="approach">What I Did <em>About It</em></h2>
+
+        <p>Complaining is data. But data without action is just noise.</p>
+
+        <h3>Going deeper - certifications</h3>
+
+        <p>
+          I enrolled in DataCamp's Data Engineering track and Google's Advanced Data Analytics Professional
+          Certificate and started the online dbt course as well. A cloud certification (Azure or AWS) is next on the
+          list. The logic is simple: if
+          the market wants T-shaped, I will pick my vertical and go deep. Data engineering is where I am
+          pointing that investment. The breadth I already have. The depth is what I am actively building.
+        </p>
+
+        <h3>Building things that solve real problems</h3>
+
+        <p>
+          The most honest signal of competence is not just a certificate. It is something that works.
+        </p>
+
+        <p>
+          So I started building. My current side project, DZ-PROP-TRUTH, was born out of a real frustration:
+          Algerian real estate has no credible, centralized source of truth. No reliable price indices,
+          no busy-area mapping, no transparent data. Prices are word-of-mouth, listings are scattered across
+          WhatsApp groups and informal platforms, and buyers navigate almost entirely on gut feel. I am
+          building a system to change that: scraping, cleaning, modelling, and eventually publishing price
+          trends per wilaya.
+        </p>
+
+        <p>
+          Version 0 is still in progress and I will write about it properly once it ships. But it is the
+          kind of problem I could not stop thinking about, which is usually the right reason to build
+          something. The portfolio follows from the work, not the other way around.
+        </p>
+
+        <h3>Showing up: tech meetups and actual humans</h3>
+
+        <p>
+          One of the better decisions I made during this period was installing the Meetup app and actually
+          going to things.
+        </p>
+
+        <p>
+          Through it I found communities that genuinely changed the texture of this search. Women in Product NL
+          and PyLadies Amsterdam both deserve a proper shoutout. These are communities actively working to
+          empower women and minorities in tech, and they do it well. Walking into a room full of people who
+          are building things, asking hard questions, and rooting for each other is a different kind of
+          resource than any job board.
+        </p>
+
+        <p>
+          Beyond the obvious networking benefit, the meetups gave me something subtler: a real preview of
+          Dutch work culture from the inside. How people communicate in professional settings, what they
+          value, how conversations move. That kind of context is genuinely hard to get from a job listing
+          or a LinkedIn profile, and it has made me a sharper, more informed candidate.
+        </p>
+
+        <h2 id="conclusion"><em>Where I Am Now</em></h2>
+
+        <p>
+          Still looking. Still learning. Still building. Still here.
+        </p>
+
+        <p>
+          The market is competitive, the language barrier is real, and the automated rejection pipeline
+          is soul-crushing in a very specific, lowercase way. But I have also seen what I can build when
+          given the chance, and I know that evidence is solid.
+        </p>
+
+        <p>
+          The ping is high. But the connection is still up.
+        </p>
+
+        <p>
+          <em>Next up: a technical deep-dive into DZ-PROP-TRUTH: what it is, why Algerian real estate
+            data resists collection, and what I am doing about it.</em>
+        </p>
+
+      </article>
+
+      <aside class="sidebar">
+
+        <div class="sidebar-block">
+          <div class="sidebar-label">Contents</div>
+          <ul class="toc-list">
+            <li><a href="#the-shape">The shape of the problem</a></li>
+            <li><a href="#blockers">The blockers, ranked</a></li>
+            <li><a href="#approach">What I did about it</a></li>
+            <li><a href="#conclusion">Where I am now</a></li>
+          </ul>
+        </div>
+
+        <!-- <div class="sidebar-block">
+          <div class="sidebar-label">Project Documents</div>
+          <div class="doc-links">
+            <a href="../DZ_PROP_TRUTH_Executive_Summary.html" class="doc-link">
+              <span class="doc-link-label l-a">Synthesis</span>
+              Executive Summary
+              <span class="doc-link-arrow">→</span>
+            </a>
+            <a href="../DZ_PROP_TRUTH_strategy.html" class="doc-link">
+              <span class="doc-link-label l-e">Eng</span>
+              PACE Strategy
+              <span class="doc-link-arrow">→</span>
+            </a>
+            <a href="../DZ_PROP_TRUTH_Proposal.html" class="doc-link">
+              <span class="doc-link-label l-p">Foundation</span>
+              Project Proposal
+              <span class="doc-link-arrow">→</span>
+            </a>
+            <a href="../DZ_PROP_TRUTH_Impact_Assessment.html" class="doc-link">
+              <span class="doc-link-label l-purple">Impact</span>
+              Impact Assessment
+              <span class="doc-link-arrow">→</span>
+            </a>
+          </div>
+        </div> -->
+
+      </aside>
+    </div>
+
+    <div class="footer">
+      Farah Tlemcani · Built with HTML/CSS · 2026
+    </div>
+
+  </div>
+</body>
+
+</html>

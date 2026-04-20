@@ -17,14 +17,14 @@
       --bg-subtle: #f7f7f5;
       --accent: #1a1a1a;
 
-      --badge-eng: #F5C4B3;
-      --badge-eng-text: #712B13;
+      --badge-career: #F3E8FF;
+      --badge-career-text: #581C87;
       --badge-data: #E6F1FB;
       --badge-data-text: #0C447C;
       --badge-essay: #EAF3DE;
       --badge-essay-text: #27500A;
-      --badge-note: #F3E8FF;
-      --badge-note-text: #581C87;
+      --badge-note: #F5C4B3;
+      --badge-note-text: #712B13;
       --badge-project: #FAEEDA;
       --badge-project-text: #633806;
       --badge-personal: #FFE4E6;
@@ -234,9 +234,9 @@
       font-weight: 500;
     }
 
-    .badge-eng {
-      background: var(--badge-eng);
-      color: var(--badge-eng-text);
+    .badge-career {
+      background: var(--badge-career);
+      color: var(--badge-career-text);
     }
 
     .badge-data {
@@ -336,43 +336,58 @@
 
     <div class="page-header">
       <div>
-        <p class="page-eyebrow">All posts · <strong>26 entries</strong></p>
+        <p class="page-eyebrow">All posts · <strong>3 entries</strong></p>
         <h1 class="page-title">Writing &amp;<br><em>Field Notes</em></h1>
       </div>
       <div class="page-meta">
-        <strong>Updated</strong><br>Apr 2025<br><br>
+        <strong>Updated</strong><br>Apr 2026<br><br>
         <strong>Topics</strong><br>Data · NLP · Algeria
       </div>
     </div>
 
     <div class="filter-bar">
       <button class="filter-btn active" onclick="filterPosts(this, 'all')">All</button>
-      <button class="filter-btn" onclick="filterPosts(this, 'eng')">Engineering</button>
+      <button class="filter-btn" onclick="filterPosts(this, 'career')">Career</button>
       <button class="filter-btn" onclick="filterPosts(this, 'data')">Data</button>
       <button class="filter-btn" onclick="filterPosts(this, 'essay')">Essay</button>
       <button class="filter-btn" onclick="filterPosts(this, 'note')">Note</button>
       <button class="filter-btn" onclick="filterPosts(this, 'project')">Project</button>
       <button class="filter-btn" onclick="filterPosts(this, 'personal')">Personal</button>
     </div>
+    <a class="post-row" href="blogs/2026-04-20_too-much-not-enough.html" data-tags=" personal career">
+      <span class="post-date">Apr 20, 2026</span>
+      <div class="post-body">
+        <span class="post-title">Too Much, Not Enough: Field Notes from the Dutch Tech Job Market</span>
+        <p class="post-excerpt"> A Bachelor's degree, a Master's degree, two startups, a multinational competition win,
+          and Workday still says no.</p>
+        <div class="post-tags">
+          <span class="badge badge-career">Career</span>
+          <span class="badge badge-personal">Personal</span>
+        </div>
+      </div>
+      <span class="post-arrow">→</span>
+    </a>
 
     <div class="post-list" id="post-list">
+      <a class="post-row" href="blogs/2026-04-20_social-butterfly-to-socially-crippled.html" data-tags="personal">
+        <span class="post-date">Apr 20, 2026</span>
+        <div class="post-body">
+          <span class="post-title">Social Butterfly to Socially Awkward</span>
+          <p class="post-excerpt">How I went from being the life of the party to someone who can barely make eye
+            contact.</p>
+          <div class="post-tags">
+            <span class="badge badge-personal">Personal</span>
+          </div>
+        </div>
+        <span class="post-arrow">→</span>
+      </a>
+
       <a class="post-row" href="blogs/2026-04-19_the-first-commit.html" data-tags="personal">
         <span class="post-date">Apr 19, 2026</span>
         <div class="post-body">
           <span class="post-title">The First Commit: Spec-ing Out My Digital Identity</span>
           <p class="post-excerpt">The very first post on my blog, where I talk about why I built this space and what
             I hope to achieve with it.</p>
-          <div class="post-tags">
-            <span class="badge badge-personal">Personal</span>
-          </div>
-        </div>
-        <span class="post-arrow">→</span>
-      </a><a class="post-row" href="blogs/2026-04-20_social-butterfly-to-socially-crippled.html" data-tags="personal">
-        <span class="post-date">Apr 20, 2026</span>
-        <div class="post-body">
-          <span class="post-title">Social Butterfly to Socially Awkward</span>
-          <p class="post-excerpt">How I went from being the life of the party to someone who can barely make eye
-            contact.</p>
           <div class="post-tags">
             <span class="badge badge-personal">Personal</span>
           </div>
