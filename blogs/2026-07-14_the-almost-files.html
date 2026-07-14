@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Almost Files · Farah Tlemcani</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #4a4a4a;
+      --color-text-tertiary: #9a9a9a;
+      --color-border-tertiary: #e0e0e0;
+      --color-background-secondary: #f9f9f9;
+      --badge-p: #E6F1FB;
+      --badge-p-text: #0C447C;
+      --badge-a: #EAF3DE;
+      --badge-a-text: #27500A;
+      --badge-purple: #F3E8FF;
+      --badge-purple-text: #581C87;
+      --badge-e-bg: #F5C4B3;
+      --badge-e-text: #712B13;
+      --badge-personal: #FFE4E6;
+      --badge-personal-text: #9F1239;
+    }
+
+    .doc {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--color-text-primary);
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      background: white;
+    }
+
+    .doc-header {
+      border-bottom: 2px solid var(--color-text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .doc-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-eyebrow a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+
+    .doc-eyebrow a:hover {
+      color: var(--color-text-primary);
+      text-decoration: underline;
+    }
+
+    .doc-title {
+      font-family: 'Fraunces', serif;
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .doc-title em {
+      font-style: italic;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      line-height: 1.9;
+    }
+
+    .doc-meta strong {
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    .badge {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .badge-data {
+      background: var(--badge-p);
+      color: var(--badge-p-text);
+    }
+
+    .badge-career {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .badge-project {
+      background: var(--badge-a);
+      color: var(--badge-a-text);
+    }
+
+    .badge-eng {
+      background: var(--badge-e-bg);
+      color: var(--badge-e-text);
+    }
+
+    .badge-essay {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .badge-note {
+      background: #f1f1ee;
+      color: #4a4a4a;
+    }
+
+    .badge-personal {
+      background: var(--badge-personal);
+      color: var(--badge-personal-text);
+    }
+
+    .post-layout {
+      display: grid;
+      grid-template-columns: 1fr 210px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .article p {
+      font-size: 13.5px;
+      line-height: 1.9;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.4rem;
+    }
+
+    .article h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin: 2.5rem 0 0.9rem;
+      color: var(--color-text-primary);
+    }
+
+    .article h2 em {
+      font-style: italic;
+    }
+
+    .article h3 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0 0.6rem;
+      color: var(--color-text-primary);
+    }
+
+    .article blockquote {
+      border-left: 2px solid var(--color-text-primary);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    .article pre {
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 6px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.4rem 0;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .article code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--color-background-secondary);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .article pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .article ul,
+    .article ol {
+      padding-left: 1.25rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .article li {
+      font-size: 13.5px;
+      line-height: 1.85;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.35rem;
+    }
+
+    .article a {
+      color: var(--color-text-primary);
+      text-underline-offset: 3px;
+    }
+
+    .article figure {
+      margin: 1.75rem 0;
+    }
+
+    .article figure img {
+      max-width: 100%;
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 6px;
+      display: block;
+    }
+
+    .article figcaption {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .callout {
+      background: var(--color-background-secondary);
+      border-left: 2px solid var(--color-text-primary);
+      padding: 1rem 1.25rem;
+      margin: 1.75rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .callout p {
+      font-size: 12.5px;
+      margin-bottom: 0;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-block {
+      padding: 1.1rem 1.25rem;
+      background: var(--color-background-secondary);
+      border-radius: 8px;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .toc-list a {
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+      display: block;
+    }
+
+    .toc-list a:hover {
+      color: var(--color-text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .doc-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .doc-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      padding: 0.5rem 0.6rem;
+      border-radius: 5px;
+      border: 0.5px solid var(--color-border-tertiary);
+      transition: all 0.15s;
+      gap: 0.5rem;
+    }
+
+    .doc-link:hover {
+      border-color: var(--color-text-primary);
+      color: var(--color-text-primary);
+      background: white;
+    }
+
+    .doc-link-label {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 1px 5px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .doc-link-label.l-a {
+      background: var(--badge-a);
+      color: var(--badge-a-text);
+    }
+
+    .doc-link-label.l-e {
+      background: var(--badge-e-bg);
+      color: var(--badge-e-text);
+    }
+
+    .doc-link-label.l-p {
+      background: var(--badge-p);
+      color: var(--badge-p-text);
+    }
+
+    .doc-link-label.l-purple {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .doc-link-arrow {
+      color: var(--color-text-tertiary);
+      flex-shrink: 0;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--color-text-tertiary);
+      margin-bottom: 2rem;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover {
+      color: var(--color-text-primary);
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 680px) {
+      .post-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .doc-header {
+        grid-template-columns: 1fr;
+      }
+
+      .doc-meta {
+        text-align: left;
+        margin-top: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="doc">
+
+    <a href="../index.html" class="back-link">← Back to portal</a>
+
+    <div class="doc-header">
+      <div>
+        <p class="doc-eyebrow">
+          <a href="../index.html">My Personal Blog</a> · Field Notes ·
+          <span class="badge badge-personal" style="vertical-align:middle;">Personal</span>
+          <span class="badge badge-career" style="vertical-align:middle;">Career</span>
+        </p>
+        <h1 class="doc-title">
+          The Almost Files:<br>
+          <em>Notes from Inside the Recruitment Marathon</em>
+        </h1>
+      </div>
+      <div class="doc-meta">
+        <strong>Date</strong><br>July 14, 2026<br><br>
+        <strong>Read</strong><br>7 min<br><br>
+        <strong>Author</strong><br>Farah Tlemcani
+      </div>
+    </div>
+
+    <div class="post-layout">
+      <article class="article">
+
+        <p>
+          I promised a DZ-PROP-TRUTH deep-dive next. It's still coming. But this needed to be written
+          first, because it's been the actual shape of my life since the last post, not one process, all
+          of them, stacked on top of each other.
+        </p>
+
+        <p>
+          Some processes end in a day. Others take a month. The range I've been living in lately is
+          three to seven rounds: a recruiter, a head of tech, a future colleague, and finally someone
+          senior enough that the interview starts to feel less like a conversation and more like a
+          performance review of my entire adult life.
+        </p>
+
+        <p>
+          Here is the honest tally. A good chunk of my applications ended within two days of posting.
+          No interview, no conversation, just the door closing before I'd even finished refreshing the
+          tab. And of everything that came back with an actual reason attached, more than 80% said the
+          same thing.
+        </p>
+
+        <h2 id="the-number">The Number That <em>Won't Leave Me Alone</em></h2>
+
+        <p>
+          Dutch. Not "a plus." Not "nice to have." The reason, stated plainly, over and over.
+        </p>
+
+        <div class="callout">
+         <figure>
+  <img src="assets/rejection.png" alt="Six rejection emails from different companies, each highlighting the Dutch language requirement">
+  <figcaption>"We really liked your profile, but unfortunately we need someone who speaks Dutch fluently." — one of six, worded six different ways.</figcaption>
+</figure>
+        </div>
+
+        <p>
+          I understand it, even when it stings. A Business Analyst spends a good chunk of her working
+          life speaking, to stakeholders, to clients, to whoever's on the other side of a requirements
+          workshop. Being able to do that in their own language isn't a bureaucratic checkbox, it's
+          most of the job. I can't argue with a requirement that's actually describing the work
+          correctly.
+        </p>
+
+        <p>
+          So I started learning Dutch properly. Not the background-app-streak version I'd been doing.
+          The real version. My goal isn't "conversational." My goal is that someone mistakes me for a
+          local by accident, mid-sentence, before they clock the accent. XD. Every one of these
+          rejections is fuel for that now, not just a closed door. If I'm going to build a life and a
+          career here, speaking the language properly stops being optional the moment I decided that's
+          actually what I want.
+        </p>
+
+        <h2 id="the-fifteen-percent">The Other <em>Fifteen Percent</em></h2>
+
+        <p>
+          For the roles that don't require Dutch, roughly 15% of what I apply to, I've stopped winging
+          it entirely. Job hunting has become my actual job. At this point I should just start my own
+          recruitment platform and cut out the middleman.
+        </p>
+
+        <p>
+          Here's the framework, roughly:
+        </p>
+
+        <ul>
+          <li>Map the whole process first, every round, every person I'll likely meet.</li>
+          <li>Research the company's stated vision and values, and check honestly whether they line up
+            with mine, not just whether they sound good on a careers page.</li>
+          <li>Study the actual product, then figure out specifically how I'd contribute to it and where
+            I could drive the business forward, not a generic "I'm a hard worker" angle.</li>
+          <li>Build a knowledge base for each process and use Claude to run mock interviews against it,
+            with proper deep-dive prep documents, not just a skim the night before.</li>
+        </ul>
+
+        <p>
+          The part I like most: I end up acting as a Business Analyst even while I'm trying to get
+          hired as one. When I'm talking to a business manager, I speak in metrics, frameworks, business
+          impact, stakeholders. When I'm talking to someone technical, I switch, dashboards, Python,
+          datasets, pipelines, infrastructure. Same me, different dialect, depending on who's actually
+          in the room. It's the job before I've been given the job.
+        </p>
+
+        <p>
+          And it works, in the sense that it gets real reactions. The feedback is almost always
+          positive. Genuinely warm, specific, the kind of feedback that makes you start quietly
+          picturing your desk, your onboarding week, your first Monday. My hopes climb exactly as high
+          as the prep did.
+        </p>
+
+        <p>
+          And then the final day arrives, and it's always some version of "unfortunately." Dopamine and
+          serotonin, both, straight down.
+        </p>
+
+        <h2 id="nobody-warns-you">The Part <em>Nobody Warns You About</em></h2>
+
+        <p>Nobody tells you that the good rejections are harder than the bad ones.</p>
+
+        <p>
+          A generic "we've decided to move forward with other candidates" costs nothing. You shrug, you
+          apply to the next thing. But a month of real conversations, real prep, a genuine case of "it
+          was this close," that one you carry around for a few days whether you want to or not. There's
+          no clean lesson in almost. Just the knowledge that you were one specific, nameable thing away
+          from a yes.
+        </p>
+
+        <p>
+          I know exactly what that one thing was, too. Which is almost worse. Not vague. Not "cultural
+          fit." Specific, learnable, and simply not there yet.
+        </p>
+
+        <h2 id="where-i-am-now"><em>Where I Am Now</em></h2>
+
+        <p>
+          Still applying. Still prepping like it's a full-time job, because right now it is one. Still
+          hitting the same wall on 80% of what I send out, and still turning that wall into the reason
+          I finally take Dutch seriously instead of the reason I feel sorry for myself.
+        </p>
+
+        <p>
+          The framework works. The feedback is real. What's missing is the one word at the end of the
+          process, and that word is the whole reason I'm rebuilding my week around actually learning
+          the language instead of just meaning to.
+        </p>
+
+        <p>
+          <em>Next up: honestly, I don't know. XD. DZ-PROP-TRUTH is paused, not cancelled, the job hunt is
+  the actual priority right now. I'll pick it back up once I have a job to build it around, and
+  when I do, I'll write it properly.</em>
+        </p>
+
+      </article>
+
+      <aside class="sidebar">
+
+        <div class="sidebar-block">
+          <div class="sidebar-label">Contents</div>
+          <ul class="toc-list">
+            <li><a href="#the-number">The number that won't leave me alone</a></li>
+            <li><a href="#the-fifteen-percent">The other fifteen percent</a></li>
+            <li><a href="#nobody-warns-you">The part nobody warns you about</a></li>
+            <li><a href="#where-i-am-now">Where I am now</a></li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+
+    <div class="footer">
+      Farah Tlemcani · Built with HTML/CSS · 2026
+    </div>
+
+  </div>
+</body>
+
+</html>
