@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beginner's Luck · Farah Tlemcani</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&display=swap');
+
+    :root {
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #4a4a4a;
+      --color-text-tertiary: #9a9a9a;
+      --color-border-tertiary: #e0e0e0;
+      --color-background-secondary: #f9f9f9;
+      --badge-p: #E6F1FB;
+      --badge-p-text: #0C447C;
+      --badge-a: #EAF3DE;
+      --badge-a-text: #27500A;
+      --badge-purple: #F3E8FF;
+      --badge-purple-text: #581C87;
+      --badge-e-bg: #F5C4B3;
+      --badge-e-text: #712B13;
+      --badge-personal: #FFE4E6;
+      --badge-personal-text: #9F1239;
+    }
+
+    .doc {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--color-text-primary);
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+      background: white;
+    }
+
+    .doc-header {
+      border-bottom: 2px solid var(--color-text-primary);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+    }
+
+    .doc-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-eyebrow a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+
+    .doc-eyebrow a:hover {
+      color: var(--color-text-primary);
+      text-decoration: underline;
+    }
+
+    .doc-title {
+      font-family: 'Fraunces', serif;
+      font-size: 30px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .doc-title em {
+      font-style: italic;
+    }
+
+    .doc-meta {
+      text-align: right;
+      font-size: 11px;
+      color: var(--color-text-secondary);
+      line-height: 1.9;
+    }
+
+    .doc-meta strong {
+      color: var(--color-text-primary);
+      font-weight: 500;
+    }
+
+    .badge {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .badge-data {
+      background: var(--badge-p);
+      color: var(--badge-p-text);
+    }
+
+    .badge-career {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .badge-project {
+      background: var(--badge-a);
+      color: var(--badge-a-text);
+    }
+
+    .badge-eng {
+      background: var(--badge-e-bg);
+      color: var(--badge-e-text);
+    }
+
+    .badge-essay {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .badge-note {
+      background: #f1f1ee;
+      color: #4a4a4a;
+    }
+
+    .badge-personal {
+      background: var(--badge-personal);
+      color: var(--badge-personal-text);
+    }
+
+    .post-layout {
+      display: grid;
+      grid-template-columns: 1fr 210px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .article p {
+      font-size: 13.5px;
+      line-height: 1.9;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.4rem;
+    }
+
+    .article h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 21px;
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      margin: 2.5rem 0 0.9rem;
+      color: var(--color-text-primary);
+    }
+
+    .article h2 em {
+      font-style: italic;
+    }
+
+    .article h3 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 2rem 0 0.6rem;
+      color: var(--color-text-primary);
+    }
+
+    .article blockquote {
+      border-left: 2px solid var(--color-text-primary);
+      padding-left: 1.25rem;
+      margin: 2rem 0;
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--color-text-primary);
+    }
+
+    .article pre {
+      background: var(--color-background-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 6px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.4rem 0;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .article code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      background: var(--color-background-secondary);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .article pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .article ul,
+    .article ol {
+      padding-left: 1.25rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .article li {
+      font-size: 13.5px;
+      line-height: 1.85;
+      color: var(--color-text-secondary);
+      margin-bottom: 0.35rem;
+    }
+
+    .article a {
+      color: var(--color-text-primary);
+      text-underline-offset: 3px;
+    }
+
+    .article figure {
+      margin: 1.75rem 0;
+    }
+
+    .article figure img {
+      max-width: 100%;
+      border: 0.5px solid var(--color-border-tertiary);
+      border-radius: 6px;
+      display: block;
+    }
+
+    .article figcaption {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .callout {
+      background: var(--color-background-secondary);
+      border-left: 2px solid var(--color-text-primary);
+      padding: 1rem 1.25rem;
+      margin: 1.75rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout-label {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .callout p {
+      font-size: 12.5px;
+      margin-bottom: 0;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-block {
+      padding: 1.1rem 1.25rem;
+      background: var(--color-background-secondary);
+      border-radius: 8px;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 0.5px solid var(--color-border-tertiary);
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .toc-list a {
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+      display: block;
+    }
+
+    .toc-list a:hover {
+      color: var(--color-text-primary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .doc-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .doc-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      padding: 0.5rem 0.6rem;
+      border-radius: 5px;
+      border: 0.5px solid var(--color-border-tertiary);
+      transition: all 0.15s;
+      gap: 0.5rem;
+    }
+
+    .doc-link:hover {
+      border-color: var(--color-text-primary);
+      color: var(--color-text-primary);
+      background: white;
+    }
+
+    .doc-link-label {
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 1px 5px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .doc-link-label.l-a {
+      background: var(--badge-a);
+      color: var(--badge-a-text);
+    }
+
+    .doc-link-label.l-e {
+      background: var(--badge-e-bg);
+      color: var(--badge-e-text);
+    }
+
+    .doc-link-label.l-p {
+      background: var(--badge-p);
+      color: var(--badge-p-text);
+    }
+
+    .doc-link-label.l-purple {
+      background: var(--badge-purple);
+      color: var(--badge-purple-text);
+    }
+
+    .doc-link-arrow {
+      color: var(--color-text-tertiary);
+      flex-shrink: 0;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--color-text-tertiary);
+      margin-bottom: 2rem;
+      transition: color 0.15s;
+    }
+
+    .back-link:hover {
+      color: var(--color-text-primary);
+    }
+
+    .footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--color-border-tertiary);
+      font-size: 10px;
+      color: var(--color-text-tertiary);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 680px) {
+      .post-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .doc-header {
+        grid-template-columns: 1fr;
+      }
+
+      .doc-meta {
+        text-align: left;
+        margin-top: 0.75rem;
+      }
+    }
+    .carousel {
+      position: relative;
+      margin: 1.75rem 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 0.5px solid var(--color-border-tertiary);
+      background: var(--color-background-secondary);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-slide figcaption {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      text-align: center;
+      padding: 0.6rem 1rem;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: 0.5px solid var(--color-border-tertiary);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      color: var(--color-text-primary);
+      font-family: 'IBM Plex Mono', monospace;
+      transition: background 0.15s;
+    }
+
+    .carousel-btn:hover {
+      background: white;
+    }
+
+    .carousel-btn.prev {
+      left: 12px;
+    }
+
+    .carousel-btn.next {
+      right: 12px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 0.75rem 0;
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-border-tertiary);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--color-text-primary);
+    }
+
+    .carousel-counter {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      background: rgba(255, 255, 255, 0.9);
+      border: 0.5px solid var(--color-border-tertiary);
+      padding: 2px 7px;
+      border-radius: 10px;
+      color: var(--color-text-secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="doc">
+
+    <a href="../index.html" class="back-link">← Back to portal</a>
+
+    <div class="doc-header">
+      <div>
+        <p class="doc-eyebrow">
+          <a href="../index.html">My Personal Blog</a> · Field Notes ·
+          <span class="badge badge-personal" style="vertical-align:middle;">Personal</span>
+          <span class="badge badge-note" style="vertical-align:middle;">Note</span>
+        </p>
+        <h1 class="doc-title">
+          Beginner's Luck:<br>
+          <em>Notes from a Crochet Workshop in Eindhoven</em>
+        </h1>
+      </div>
+      <div class="doc-meta">
+        <strong>Date</strong><br>July 14, 2026<br><br>
+        <strong>Read</strong><br>4 min<br><br>
+        <strong>Author</strong><br>Farah Tlemcani
+      </div>
+    </div>
+
+    <div class="post-layout">
+      <article class="article">
+
+        <p>
+          Not everything this year has been about job hunting, even though it's felt that way lately.
+          This weekend I spent four straight hours teaching a room full of strangers how to crochet a
+          bag, at Al Warsha Studio in Eindhoven, and I think it did more for my sense of actually
+          belonging here than most of what I've written about on this blog so far.
+        </p>
+
+        <p>
+          I've been leaning on this hobby more than I expected to since moving here. It's how I've made
+          new friends, earned a little money on the side, and kept doing the one thing I love most that
+          has absolutely nothing to do with dashboards or requirements documents. Crochet doesn't care
+          what your CV says.
+        </p>
+
+        <h2 id="the-design">The <em>Design</em></h2>
+
+        <p>
+          I designed the bag before anything else, on purpose. Two simple stitches, nothing fancy, the
+          actual basics. The goal was that everyone walks out four hours later holding something real, a
+          full, stylish, wearable bag, not just "I learned how to chain 80 and make a foundation row."
+          Concrete beats impressive, especially on day one.
+        </p>
+
+        <p>
+          The room itself was the best part before we'd even picked up a hook. Dutch, Indian, Syrian,
+          Egyptian, Palestinian, all in one room, all leaning over the same two stitches at the same
+          time.
+        </p>
+
+        <h2 id="the-lesson">The <em>Accidental Lesson</em></h2>
+
+        <p>
+          I told everyone upfront: don't follow my pattern blindly. If you mess up a stitch, that's not
+          a mistake to panic over, that might just be a new design decision. Keep going and see what it
+          turns into.
+        </p>
+
+        <p>
+          They took that far more seriously than I expected. By the end we had a full spread of colors
+          and shapes and little personal touches nobody else in the room had, and if I'm honest, a lot
+          of them made mine look boring by comparison.
+        </p>
+
+        <p>
+          That actually taught me something I didn't walk in expecting to learn. Being a beginner is a
+          real advantage. Once you know the rules, once a process is fully internalized, you follow it
+          automatically, and what you make is structured and clean and beautiful, and also
+          reproducible, the same shape everyone who knows the same rules would make. Beginners don't
+          have that constraint yet. They experiment because they don't know they're not supposed to, and
+          what comes out the other side is stranger and more personal and, more often than not, better.
+        </p>
+
+        <div class="carousel" id="crochet-carousel">
+          <div class="carousel-counter"><span class="counter-current">1</span> / <span class="counter-total">6</span></div>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="assets\crochet (1).JPG" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\crochet (2).JPG" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\crochet (3).JPG" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\crochet (4).JPG">
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\crochet (5).JPG" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\crochet (6).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (7).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (8).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (9).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (10).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (11).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (12).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (13).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (14).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (15).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (16).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (17).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (18).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (19).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (20).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (21).JPG" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\crochet (22).JPG" >
+            </div>
+          </div>
+          <button class="carousel-btn prev" aria-label="Previous photo">‹</button>
+          <button class="carousel-btn next" aria-label="Next photo">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <p style="font-size:11px;color:var(--color-text-tertiary);text-align:center;margin-top:-1rem;">
+          Some pics from the workshop, the girls' finished bags, every color and shape, plus mine looking slightly outclassed.
+        </p>
+
+        <h2 id="whats-next"><em>What's Next</em></h2>
+
+        <p>
+          I'd love to do this again somewhere new. Amsterdam, maybe? Who knows :3
+        </p>
+
+      </article>
+
+      <aside class="sidebar">
+
+        <div class="sidebar-block">
+          <div class="sidebar-label">Contents</div>
+          <ul class="toc-list">
+            <li><a href="#the-design">The design</a></li>
+            <li><a href="#the-lesson">The accidental lesson</a></li>
+            <li><a href="#whats-next">What's next</a></li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+
+    <div class="footer">
+      Farah Tlemcani · Built with HTML/CSS · 2026
+    </div>
+
+  </div>
+  <script>
+    (function () {
+      document.querySelectorAll('.carousel').forEach(function (carousel) {
+        const track = carousel.querySelector('.carousel-track');
+        const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+        const dotsWrap = carousel.querySelector('.carousel-dots');
+        const prevBtn = carousel.querySelector('.carousel-btn.prev');
+        const nextBtn = carousel.querySelector('.carousel-btn.next');
+        const counterCurrent = carousel.querySelector('.counter-current');
+        const counterTotal = carousel.querySelector('.counter-total');
+        let index = 0;
+
+        if (counterTotal) counterTotal.textContent = slides.length;
+
+        slides.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsWrap.appendChild(dot);
+        });
+
+        function update() {
+          track.style.transform = 'translateX(-' + (index * 100) + '%)';
+          dotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+            d.classList.toggle('active', i === index);
+          });
+          if (counterCurrent) counterCurrent.textContent = index + 1;
+        }
+
+        function goTo(i) {
+          index = (i + slides.length) % slides.length;
+          update();
+        }
+
+        prevBtn.addEventListener('click', () => goTo(index - 1));
+        nextBtn.addEventListener('click', () => goTo(index + 1));
+
+        // touch swipe support
+        let startX = 0;
+        track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+        track.addEventListener('touchend', (e) => {
+          const delta = e.changedTouches[0].clientX - startX;
+          if (Math.abs(delta) > 40) goTo(delta > 0 ? index - 1 : index + 1);
+        });
+
+        // keyboard support when carousel is focused
+        carousel.setAttribute('tabindex', '0');
+        carousel.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') goTo(index - 1);
+          if (e.key === 'ArrowRight') goTo(index + 1);
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>
