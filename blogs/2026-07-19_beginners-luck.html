@@ -428,18 +428,26 @@
       transition: transform 0.4s ease;
     }
 
-    .carousel-slide {
-      min-width: 100%;
-      flex-shrink: 0;
-    }
+.carousel-slide {
+  position: relative;
+  min-width: 100%;
+  flex-shrink: 0;
+  height: 420px;
+  background: var(--color-background-secondary);
+  overflow: hidden;
+}
 
-    .carousel-slide img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-      display: block;
-    }
-
+.carousel-slide img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
     .carousel-slide figcaption {
       font-size: 11px;
       color: var(--color-text-tertiary);
@@ -509,8 +517,14 @@
       border-radius: 10px;
       color: var(--color-text-secondary);
     }
+    .article figure video {
+  max-width: 100%;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: 6px;
+  display: block;
+}
   </style>
-   <script>
+  <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -526,7 +540,7 @@
         <p class="doc-eyebrow">
           <a href="../index.html">My Personal Blog</a> · Field Notes ·
           <span class="badge badge-personal" style="vertical-align:middle;">Personal</span>
-          <span class="badge badge-note" style="vertical-align:middle;">Note</span>
+          <span class="badge badge-essay" style="vertical-align:middle;">Essay</span>
         </p>
         <h1 class="doc-title">
           Beginner's Luck:<br>
@@ -535,7 +549,7 @@
       </div>
       <div class="doc-meta">
         <strong>Date</strong><br>July 19, 2026<br><br>
-        <strong>Read</strong><br>4 min<br><br>
+        <strong>Read</strong><br>9 min<br><br>
         <strong>Author</strong><br>Farah Tlemcani
       </div>
     </div>
@@ -546,15 +560,66 @@
         <p>
           Not everything this year has been about job hunting, even though it's felt that way lately.
           This weekend I spent four straight hours teaching a room full of strangers how to crochet a
-          bag, at Al Warsha Studio in Eindhoven, and I think it did more for my sense of actually
-          belonging here than most of what I've written about on this blog so far.
+          bag, at Al Warsha Studio in Eindhoven. It was my first ever workshop as the person running it,
+          not attending it, and I think it did more for my sense of actually belonging here than most of
+          what I've written about on this blog so far.
+        </p>
+
+        <h2 id="the-quiet-practice">The <em>Quiet Practice</em></h2>
+
+        <p>
+          If you read my post from a few months ago, <a href="2026-04-20_social-butterfly-to-socially-crippled.html">From Social Butterfly to Socially Awkward</a>,
+          you already know the shape of this. The move here cost me something I didn't know I could
+          lose: the easy, unthinking version of myself who could talk to anyone, anywhere, without
+          rehearsing it first.
         </p>
 
         <p>
-          I've been leaning on this hobby more than I expected to since moving here. It's how I've made
-          new friends, earned a little money on the side, and kept doing the one thing I love most that
-          has absolutely nothing to do with dashboards or requirements documents. Crochet doesn't care
-          what your CV says.
+          Crochet was the quiet fix, back then. It still is. I've been meeting a small group of
+          neighbours here in IJburg every two weeks since, cozy, low-effort, nobody performing anything.
+          We just sit with yarn in our hands and talk. Somewhere in the middle of hooking the same
+          stitch over and over, the overthinking loosens its grip a little. It's hard to spiral about a
+          recruiter's silence when someone next to you is asking whether you want tea.
+        </p>
+
+        <p>
+          Slowly, without me really clocking it happening in real time, those sessions gave me
+          something back. Not the old version of myself exactly, but something close, real friendships,
+          less awkwardness, fewer of the stuttering, avoid-eye-contact moments I wrote about before.
+        </p>
+
+        <h2 id="everyone-kept-saying">Everyone Kept <em>Saying the Same Thing</em></h2>
+
+        <p>
+          Somewhere along the way, the feedback started repeating itself. "You should host workshops."
+          "You should sell this, you're actually really good." I heard some version of that enough
+          times that I stopped being able to write it off as politeness.
+        </p>
+
+        <p>
+          I mentioned it, half-joking, to my friend Amina, who owns Al Warsha Studio and is one of the
+          most genuinely talented people I know. She didn't laugh it off the way I expected. She pushed
+          me, properly, to actually go do it.
+        </p>
+
+        <h2 id="amina-and-el-warsha">What <em>Al Warsha Gave Me</em></h2>
+
+        <div class="callout">
+          <div class="callout-label">→ A note on starting small</div>
+          <p>
+            Hosting your first ever workshop is a lot of moving parts for one person: sourcing
+            materials, managing bookings, actually running the room for four hours straight. Al Warsha
+            handled the "suivi" for me, the follow-through, the sourcing, the bookings, even helping
+            animate the session itself, so that I could just focus on teaching. That kind of support is
+            the entire reason a small, first-time creator gets to have a first workshop at all instead
+            of quietly shelving the idea.
+          </p>
+        </div>
+
+        <p>
+          I don't think I'd have actually done this without that push and that support. There's a
+          version of this year where "you should host a workshop" just stays a nice thing people said to
+          me once. Instead, I got to stand in a room and actually do it.
         </p>
 
         <h2 id="the-design">The <em>Design</em></h2>
@@ -565,11 +630,70 @@
           full, stylish, wearable bag, not just "I learned how to chain 80 and make a foundation row."
           Concrete beats impressive, especially on day one.
         </p>
-
+          <div class="carousel" id="crochet-carousel">
+          <div class="carousel-counter"><span class="counter-current">1</span> / <span class="counter-total">12</span></div>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="assets\tuto00.jpeg" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\tuto01.jpeg" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\tuto02.jpeg" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\tuto03.jpeg">
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\tuto04.jpeg" >
+            </div>
+            <div class="carousel-slide">
+              <img src="assets\tuto05.jpeg" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\tuto06.jpeg" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\tuto0602.jpeg" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\tuto07.jpeg" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\tuto08.jpeg" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\tuto09.jpeg" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\tuto10.jpeg" >
+            </div>
+             <div class="carousel-slide">
+              <img src="assets\tuto11.jpeg" >
+            </div>
+            
+          </div>
+          <button class="carousel-btn prev" aria-label="Previous photo">‹</button>
+          <button class="carousel-btn next" aria-label="Next photo">›</button>
+          <div class="carousel-dots"></div>
+        </div>
+        <p style="font-size:11px;color:var(--color-text-tertiary);text-align:center;margin-top:-1rem;">
+          Some pics from the workshop, the girls' finished bags, every color and shape, plus mine looking slightly outclassed.
+        </p>
         <p>
           The room itself was the best part before we'd even picked up a hook. Dutch, Indian, Syrian,
           Egyptian, Palestinian, all in one room, all leaning over the same two stitches at the same
           time.
+        </p>
+       
+        <h2 id="as-if-we-knew">As If We'd <em>Known Each Other for Years</em></h2>
+
+        <p>
+          At some point the actual teaching quietly turned into just sitting together. Hands busy, yarn
+          everywhere, gossiping about life and work like we'd known each other for years instead of
+          hours. That's the part nobody puts in the workshop description, and it might be the actual
+          product. The bag is just what you get to take home.
         </p>
 
         <h2 id="the-lesson">The <em>Accidental Lesson</em></h2>
@@ -595,8 +719,8 @@
           what comes out the other side is stranger and more personal and, more often than not, better.
         </p>
 
-        <div class="carousel" id="crochet-carousel">
-          <div class="carousel-counter"><span class="counter-current">1</span> / <span class="counter-total">6</span></div>
+       <div class="carousel" id="crochet-carousel">
+          <div class="carousel-counter"><span class="counter-current">1</span> / <span class="counter-total">22</span></div>
           <div class="carousel-track">
             <div class="carousel-slide">
               <img src="assets\crochet (1).JPG" >
@@ -672,6 +796,32 @@
         <p style="font-size:11px;color:var(--color-text-tertiary);text-align:center;margin-top:-1rem;">
           Some pics from the workshop, the girls' finished bags, every color and shape, plus mine looking slightly outclassed.
         </p>
+         
+         <figure>
+        <video controls preload="metadata" poster="assets/bag.jpeg">
+    <source src="assets/vid1.mp4" type="video/mp4">
+    Your browser doesn't support embedded video. 
+    <a href="assets/vid1.MP4">Download the video</a> instead.
+  </video>
+  <figcaption>The final product (made by me), a pink stylish handbag .</figcaption>
+</figure>
+
+        <h2 id="the-callback">Closing the <em>Loop</em></h2>
+
+        <p>
+          Back in April, I wrote that starting over here had switched something off in me, that the
+          ping had gone to 999 and I didn't know when it would come back down. I didn't have an ending
+          for that post because I didn't have one yet.
+        </p>
+
+        <p>
+          This is the closest thing to an update I have: it's coming down. Slowly, in the unglamorous
+          form of biweekly yarn sessions with neighbours and a four-hour Saturday teaching strangers how
+          to make a bag. Nothing about any of this looked like healing while it was happening, it just
+          looked like a hobby. But somewhere inside the low-effort, cozy version of showing up every two
+          weeks, I found actual life lessons, about starting small, about letting people push you, about
+          how being a beginner again isn't a step backward.
+        </p>
 
         <h2 id="whats-next"><em>What's Next</em></h2>
 
@@ -686,8 +836,13 @@
         <div class="sidebar-block">
           <div class="sidebar-label">Contents</div>
           <ul class="toc-list">
+            <li><a href="#the-quiet-practice">The quiet practice</a></li>
+            <li><a href="#everyone-kept-saying">Everyone kept saying the same thing</a></li>
+            <li><a href="#amina-and-el-warsha">What Al Warsha gave me</a></li>
             <li><a href="#the-design">The design</a></li>
+            <li><a href="#as-if-we-knew">As if we'd known each other for years</a></li>
             <li><a href="#the-lesson">The accidental lesson</a></li>
+            <li><a href="#the-callback">Closing the loop</a></li>
             <li><a href="#whats-next">What's next</a></li>
           </ul>
         </div>
